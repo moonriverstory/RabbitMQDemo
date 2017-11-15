@@ -1,3 +1,5 @@
+package hello;
+
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -21,6 +23,7 @@ public class Send {
         //create a channel
         Channel channel = connection.createChannel();
         //declare a message queue
+        //这里queue的持久化设置为false，则重启queue就消失了
         channel.queueDeclare(QUEUE_NAME, false, false, false, null);
         String message = "Hello World!";
         //send msg

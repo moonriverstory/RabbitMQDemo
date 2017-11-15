@@ -1,3 +1,5 @@
+package hello;
+
 import com.rabbitmq.client.*;
 
 import java.io.IOException;
@@ -7,9 +9,7 @@ public class Recv {
     private final static String QUEUE_NAME = "hello";
     private final static String HOST = "106.14.5.254";
 
-    public static void main(String[] argv)
-            throws java.io.IOException,
-            java.lang.InterruptedException, TimeoutException {
+    public static void main(String[] argv) throws java.io.IOException, java.lang.InterruptedException, TimeoutException {
 
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost(HOST);
