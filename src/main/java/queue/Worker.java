@@ -23,7 +23,7 @@ public class Worker {
         //但是，你要注意到：我在把autoAck设置为true的时候，运行worker，停掉服务器，没处理完的那几个消息也都在后续处理了，
         //而不是因为每次只处理一个，就没有都取出来=。= 这个设计还好吧~
         int prefetchCount = 1;
-        channel.basicQos(1);
+        channel.basicQos(prefetchCount);
 
         final Consumer consumer = new DefaultConsumer(channel) {
             @Override

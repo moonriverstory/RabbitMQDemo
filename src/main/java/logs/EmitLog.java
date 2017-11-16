@@ -1,12 +1,15 @@
-package queue;
+package logs;
 
+import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
-import com.rabbitmq.client.MessageProperties;
 
-public class NewTask {
-    private static final String TASK_QUEUE_NAME = "task_queue";
+/**
+ * 创建一个日志交换机给mq
+ */
+public class EmitLog {
+    private static final String EXCHANGE_NAME = "logs";
     private final static String HOST = "106.14.5.254";
 
     public static void main(String[] argv) throws Exception {
@@ -18,25 +21,21 @@ public class NewTask {
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
 
-        //持久化标记，在queue创建声明时设置
-        boolean durable = true;
-        channel.queueDeclare(TASK_QUEUE_NAME, durable, false, false, null);
+        //声明一个交换机
+        channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.FANOUT);
 
         String message = getMessage(argv);
 
-        //第一个参数控制消息发送到哪个交换机，为空使用默认交换机
-        channel.basicPublish("", TASK_QUEUE_NAME,
-                MessageProperties.PERSISTENT_TEXT_PLAIN,
-                message.getBytes("UTF-8"));
+        channel.basicPublish(EXCHANGE_NAME, "", null, message.getBytes("UTF-8"));
         System.out.println(" [x] Sent '" + message + "'");
 
         channel.close();
         connection.close();
     }
 
-    private static String getMessage(String[] strings) {
+    private static String getMessage(String[] strings){
         if (strings.length < 1)
-            return "Hello World!.....";
+            return "info: Hello World!";
         return joinStrings(strings, " ");
     }
 

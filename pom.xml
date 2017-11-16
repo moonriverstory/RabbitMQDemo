@@ -17,14 +17,6 @@
             <version>5.0.0</version>
         </dependency>
 
-        <!-- JUnit -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.11</version>
-            <scope>test</scope>
-        </dependency>
-
         <!-- SLF4J -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -32,11 +24,12 @@
             <version>1.7.7</version>
         </dependency>
 
-        <!-- Apache Commons Lang -->
+        <!-- JUnit -->
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.1</version>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>
