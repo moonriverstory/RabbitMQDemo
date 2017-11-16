@@ -26,6 +26,7 @@ public class EmitLog {
 
         String message = getMessage(argv);
 
+        //很神奇的一段代码！用来做实验的吧，没有配置queue，这个消息发送到哪里呢？
         channel.basicPublish(EXCHANGE_NAME, "", null, message.getBytes("UTF-8"));
         System.out.println(" [x] Sent '" + message + "'");
 
